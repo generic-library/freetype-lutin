@@ -7,12 +7,12 @@ def get_desc():
 
 
 def create(target):
-	myModule = module.Module(__file__, 'freetype', 'LIBRARY')
+	my_module = module.Module(__file__, 'freetype', 'LIBRARY')
 	
 	#remove compilation warning (specific for external libs):
-	myModule.remove_compile_warning()
+	my_module.remove_compile_warning()
 	
-	myModule.add_src_file([
+	my_module.add_src_file([
 		'freetype/base/ftbbox.c',
 		'freetype/base/ftbitmap.c',
 		'freetype/base/ftglyph.c',
@@ -32,7 +32,7 @@ def create(target):
 		'freetype/psnames/psnames.c',
 		'freetype/pshinter/pshinter.c'])
 	
-	myModule.compile_flags('c', [
+	my_module.compile_flags('c', [
 		'-W',
 		'-Wall',
 		'-DPIC',
@@ -40,25 +40,25 @@ def create(target):
 		'-DFT2_BUILD_LIBRARY',
 		'-DANDROID_FONT_HACK=1'])
 	
-	myModule.add_export_path(tools.get_current_path(__file__))
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/internal")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/internal/services")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/psaux")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/pshinter")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/psnames")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/raster")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/sfnt")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/smooth")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/truetype")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/autofit")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/base")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/cff")
-	myModule.add_path(tools.get_current_path(__file__)+"/freetype/config")
+	my_module.add_export_path(tools.get_current_path(__file__))
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/internal")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/internal/services")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/psaux")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/pshinter")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/psnames")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/raster")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/sfnt")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/smooth")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/truetype")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/autofit")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/base")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/cff")
+	my_module.add_path(tools.get_current_path(__file__)+"/freetype/config")
 	
-	myModule.compile_version_CC(1999)
+	my_module.compile_version_CC(1999)
 	
 	# add the currrent module at the 
-	return myModule
+	return my_module
 	
 
