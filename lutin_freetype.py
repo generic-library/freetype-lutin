@@ -130,5 +130,8 @@ def create(target, module_name):
 	my_module.add_path(tools.get_current_path(__file__)+"/freetype/cff")
 	my_module.add_path(tools.get_current_path(__file__)+"/freetype/config")
 	my_module.compile_version("c", 1999)
+	my_module.add_module_depend([
+	    'c'
+	    ])
 	return my_module
 
