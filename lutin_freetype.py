@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import lutin.module as module
+import lutin.debug as debug
 import lutin.tools as tools
 
 
@@ -34,8 +34,7 @@ def get_maintainer():
 def get_version():
 	return [2,3,6]
 
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+def configure(target, my_module):
 	my_module.remove_compile_warning()
 	my_module.add_src_file([
 		'freetype/base/ftbbox.c',
@@ -114,24 +113,24 @@ def create(target, module_name):
 		'-DDARWIN_NO_CARBON',
 		'-DFT2_BUILD_LIBRARY',
 		'-DANDROID_FONT_HACK=1'])
-	my_module.add_path(tools.get_current_path(__file__))
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/internal")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/internal/services")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/psaux")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/pshinter")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/psnames")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/raster")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/sfnt")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/smooth")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/truetype")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/autofit")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/base")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/cff")
-	my_module.add_path(tools.get_current_path(__file__)+"/freetype/config")
+	my_module.add_path(".")
+	my_module.add_path("freetype/")
+	my_module.add_path("freetype/internal")
+	my_module.add_path("freetype/internal/services")
+	my_module.add_path("freetype/psaux")
+	my_module.add_path("freetype/pshinter")
+	my_module.add_path("freetype/psnames")
+	my_module.add_path("freetype/raster")
+	my_module.add_path("freetype/sfnt")
+	my_module.add_path("freetype/smooth")
+	my_module.add_path("freetype/truetype")
+	my_module.add_path("freetype/autofit")
+	my_module.add_path("freetype/base")
+	my_module.add_path("freetype/cff")
+	my_module.add_path("freetype/config")
 	my_module.compile_version("c", 1999)
 	my_module.add_depend([
 	    'c'
 	    ])
-	return my_module
+	return True
 
