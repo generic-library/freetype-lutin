@@ -32,105 +32,114 @@ def get_maintainer():
 	return ["Mailing-list Freetype <freetype-devel@nongnu.org>"]
 
 def get_version():
-	return [2,3,6]
+	return [2,7,0]
 
 def configure(target, my_module):
 	my_module.remove_compile_warning()
 	my_module.add_src_file([
-		'freetype/base/ftbbox.c',
-		'freetype/base/ftbitmap.c',
-		'freetype/base/ftglyph.c',
-		'freetype/base/ftstroke.c',
-		'freetype/base/ftxf86.c',
-		'freetype/base/ftbase.c',
-		'freetype/base/ftsystem.c',
-		'freetype/base/ftinit.c',
-		'freetype/base/ftgasp.c',
-		'freetype/base/ftadvanc.c',
-		'freetype/raster/raster.c',
-		'freetype/sfnt/sfnt.c',
-		'freetype/smooth/smooth.c',
-		'freetype/autofit/autofit.c',
-		'freetype/truetype/truetype.c',
-		'freetype/cff/cff.c',
-		'freetype/psnames/psnames.c',
-		'freetype/pshinter/pshinter.c'
-		])
-	my_module.add_header_file([
-		'freetype/ftgzip.h',
-		'freetype/ftxf86.h',
-		'freetype/ftlist.h',
-		'freetype/fterrdef.h',
-		'freetype/ft2unix.h',
-		'freetype/ftoutln.h',
-		'freetype/ftsnames.h',
-		'freetype/ftmm.h',
-		'freetype/ftmoderr.h',
-		'freetype/ftchapters.h',
-		'freetype/ftgasp.h',
-		'freetype/ftlzw.h',
-		'freetype/fterrors.h',
-		'freetype/ftsystem.h',
-		'freetype/ftwinfnt.h',
-		'freetype/ftimage.h',
-		'freetype/t1tables.h',
-		'freetype/fttypes.h',
-		'freetype/ftotval.h',
-		'freetype/ttnameid.h',
-		'freetype/ft2build.h',
-		'freetype/ftglyph.h',
-		'freetype/ftbbox.h',
-		'freetype/ttunpat.h',
-		'freetype/tttags.h',
-		'freetype/ftcache.h',
-		'freetype/ftbdf.h',
-		'freetype/ftpfr.h',
-		'freetype/ftlcdfil.h',
-		'freetype/ftmac.h',
-		'freetype/ftsizes.h',
-		'freetype/ftcid.h',
-		'freetype/ftstroke.h',
-		'freetype/ftmodapi.h',
-		'freetype/tttables.h',
-		'freetype/ftsynth.h',
-		'freetype/ftrender.h',
-		'freetype/ftgxval.h',
-		'freetype/freetype.h',
-		'freetype/ftbitmap.h',
-		'freetype/ftadvanc.h',
-		'freetype/fttrigon.h',
-		'freetype/ftincrem.h',
-		'freetype/config/ftstdlib.h',
-		'freetype/config/ftheader.h',
-		'freetype/config/ftmodule.h',
-		'freetype/config/ftconfig.h',
-		'freetype/config/ftoption.h',
-		])
+	    'freetype/src/base/ftdebug.c',
+	    'freetype/src/base/ftinit.c',
+	    'freetype/src/base/ftbase.c',
+	    'freetype/src/base/ftbbox.c',
+	    'freetype/src/base/ftbdf.c',
+	    'freetype/src/base/ftbitmap.c',
+	    'freetype/src/base/ftcid.c',
+	    'freetype/src/base/ftfntfmt.c',
+	    'freetype/src/base/ftfstype.c',
+	    'freetype/src/base/ftgasp.c',
+	    'freetype/src/base/ftglyph.c',
+	    'freetype/src/base/ftgxval.c',
+	    'freetype/src/base/ftlcdfil.c',
+	    'freetype/src/base/ftmm.c',
+	    'freetype/src/base/ftotval.c',
+	    'freetype/src/base/ftpatent.c',
+	    'freetype/src/base/ftpfr.c',
+	    'freetype/src/base/ftstroke.c',
+	    'freetype/src/base/ftsynth.c',
+	    'freetype/src/base/fttype1.c',
+	    'freetype/src/base/ftwinfnt.c',
+	    'freetype/src/truetype/truetype.c',
+	    'freetype/src/type1/type1.c',
+	    'freetype/src/cff/cff.c',
+	    'freetype/src/cid/type1cid.c',
+	    'freetype/src/pfr/pfr.c',
+	    'freetype/src/type42/type42.c',
+	    'freetype/src/winfonts/winfnt.c',
+	    'freetype/src/pcf/pcf.c',
+	    'freetype/src/bdf/bdf.c',
+	    'freetype/src/sfnt/sfnt.c',
+	    'freetype/src/autofit/autofit.c',
+	    'freetype/src/pshinter/pshinter.c',
+	    'freetype/src/raster/raster.c',
+	    'freetype/src/smooth/smooth.c',
+	    'freetype/src/cache/ftcache.c',
+	    'freetype/src/gzip/ftgzip.c',
+	    'freetype/src/lzw/ftlzw.c',
+	    'freetype/src/bzip2/ftbzip2.c',
+	    'freetype/src/psaux/psaux.c',
+	    'freetype/src/psnames/psnames.c',
+	    'freetype/src/tools/apinames.c'
+	    ])
+	my_module.add_header_path('freetype/include/', regex='*.h', recursive=True)
 	my_module.add_flag('c', [
 		'-W',
 		'-Wall',
+		'-pedantic',
+		'-ansi',
 		'-DPIC',
 		'-DDARWIN_NO_CARBON',
 		'-DFT2_BUILD_LIBRARY',
-		'-DANDROID_FONT_HACK=1'])
-	my_module.add_path(".")
+		'-DANDROID_FONT_HACK=1',
+		'-DFT_CONFIG_OPTION_SYSTEM_ZLIB',
+		#'-DFT_CONFIG_OPTION_USE_PNG',
+		'-DFT_CONFIG_CONFIG_H="<include/freetype/config/ftconfig.h>"',
+		'-DFT_CONFIG_MODULES_H="<include/freetype/config/ftmodule.h>"',
+		'-Wno-extended-offsetof'
+		])
 	my_module.add_path("freetype/")
-	my_module.add_path("freetype/internal")
-	my_module.add_path("freetype/internal/services")
-	my_module.add_path("freetype/psaux")
-	my_module.add_path("freetype/pshinter")
-	my_module.add_path("freetype/psnames")
-	my_module.add_path("freetype/raster")
-	my_module.add_path("freetype/sfnt")
-	my_module.add_path("freetype/smooth")
-	my_module.add_path("freetype/truetype")
-	my_module.add_path("freetype/autofit")
-	my_module.add_path("freetype/base")
-	my_module.add_path("freetype/cff")
-	my_module.add_path("freetype/config")
+	my_module.add_path("freetype/src/")
 	my_module.compile_version("c", 1999)
 	my_module.add_depend([
-	    'c'
+	    'c',
+	    'z',
+	    #'png'
 	    ])
+	if    "Linux" in target.get_type() \
+	   or "Android" in target.get_type():
+		my_module.add_path("freetype/builds/unix")
+		my_module.add_path("freetype/include/freetype/config/")
+		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
+		my_module.add_flag('c', [
+		    '-DHAVE_UNISTD_H=1',
+		    '-DHAVE_FCNTL_H=1',
+		    '-DHAVE_STDINT_H=1',
+		    ])
+	elif    "MacOs" in target.get_type() \
+	     or "IOs" in target.get_type():
+		my_module.add_path("freetype/builds/mac")
+		my_module.add_path("freetype/include/freetype/config/")
+		my_module.add_src_file('freetype/builds/mac/ftmac.c')
+	elif    "Windows" in target.get_type():
+		my_module.add_path("freetype/builds/unix")
+		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
+		my_module.add_path("freetype/include/freetype/config/")
+		my_module.add_flag('c', [
+		    '-DHAVE_UNISTD_H=1',
+		    '-DHAVE_FCNTL_H=1',
+		    '-DHAVE_STDINT_H=1',
+		    ])
+	
+	
 	return True
-
+"""
+ -Iobjs -I./builds/unix -Iinclude 
+ -DFT_CONFIG_OPTION_USE_BZIP2
+ -I/usr/include/harfbuzz
+ -I/usr/include/glib-2.0
+ -I/usr/lib/glib-2.0/include
+ -DFT_CONFIG_OPTION_USE_HARFBUZZ
+ -DFT_CONFIG_CONFIG_H="<ftconfig.h>"
+ 
+ -DFT_CONFIG_MODULES_H="<ftmodule.h>"
+ -o objs/ftsystem.lo 
+"""
