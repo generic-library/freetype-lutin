@@ -85,7 +85,7 @@ def configure(target, my_module):
 		'-W',
 		'-Wall',
 		'-pedantic',
-		'-ansi',
+		#'-ansi',
 		'-DPIC',
 		'-DDARWIN_NO_CARBON',
 		'-DFT2_BUILD_LIBRARY',
@@ -94,7 +94,7 @@ def configure(target, my_module):
 		#'-DFT_CONFIG_OPTION_USE_PNG',
 		'-DFT_CONFIG_CONFIG_H="<include/freetype/config/ftconfig.h>"',
 		'-DFT_CONFIG_MODULES_H="<include/freetype/config/ftmodule.h>"',
-		'-Wno-extended-offsetof'
+		#'-Wno-extended-offsetof'
 		])
 	my_module.add_path("freetype/")
 	my_module.add_path("freetype/src/")
