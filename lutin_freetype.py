@@ -11,16 +11,6 @@ def get_desc():
 
 def get_licence():
 	return "FTL"
-	"""
-	"LGPL-3": {
-		"generic":False,
-		"contaminate-static":False,
-		"contaminate-dynamic":False,
-		"redistribute-source":False,
-		"title":"FreeType License (BSD-like)",
-		"licence-file":""
-		},
-	"""
 
 def get_compagny_type():
 	return "org"
@@ -85,7 +75,7 @@ def configure(target, my_module):
 		'-W',
 		'-Wall',
 		'-pedantic',
-		#'-ansi',
+		'-ansi',
 		'-DPIC',
 		'-DDARWIN_NO_CARBON',
 		'-DFT2_BUILD_LIBRARY',
@@ -94,7 +84,7 @@ def configure(target, my_module):
 		#'-DFT_CONFIG_OPTION_USE_PNG',
 		'-DFT_CONFIG_CONFIG_H="<include/freetype/config/ftconfig.h>"',
 		'-DFT_CONFIG_MODULES_H="<include/freetype/config/ftmodule.h>"',
-		#'-Wno-extended-offsetof'
+		'-Wno-extended-offsetof'
 		])
 	my_module.add_path("freetype/")
 	my_module.add_path("freetype/src/")
@@ -118,7 +108,14 @@ def configure(target, my_module):
 	     or "IOs" in target.get_type():
 		my_module.add_path("freetype/builds/mac")
 		my_module.add_path("freetype/include/freetype/config/")
-		my_module.add_src_file('freetype/builds/mac/ftmac.c')
+		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
+		#my_module.add_src_file('freetype/builds/mac/ftmac.c')
+		my_module.add_path('freetype/src/base/')
+                my_module.add_flag('c', [
+                    '-DHAVE_UNISTD_H=1',
+                    '-DHAVE_FCNTL_H=1',
+                    '-DHAVE_STDINT_H=1',
+                    ])
 	elif    "Windows" in target.get_type():
 		my_module.add_path("freetype/builds/unix")
 		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
