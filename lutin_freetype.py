@@ -111,11 +111,11 @@ def configure(target, my_module):
 		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
 		#my_module.add_src_file('freetype/builds/mac/ftmac.c')
 		my_module.add_path('freetype/src/base/')
-                my_module.add_flag('c', [
-                    '-DHAVE_UNISTD_H=1',
-                    '-DHAVE_FCNTL_H=1',
-                    '-DHAVE_STDINT_H=1',
-                    ])
+		my_module.add_flag('c', [
+		    '-DHAVE_UNISTD_H=1',
+		    '-DHAVE_FCNTL_H=1',
+		    '-DHAVE_STDINT_H=1',
+		    ])
 	elif    "Windows" in target.get_type():
 		my_module.add_path("freetype/builds/unix")
 		my_module.add_src_file('freetype/builds/unix/ftsystem.c')
